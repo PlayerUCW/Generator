@@ -1,14 +1,14 @@
 import sys
 import random
-from PyQt5 import uic
+from UI import *
 from PyQt5.QtWidgets import QApplication, QMainWindow
 from PyQt5 import QtGui
 
 
-class MyWidget(QMainWindow):
+class MyWidget(QMainWindow, Ui_Form):
     def __init__(self):
         super().__init__()
-        uic.loadUi('UI.ui', self)
+        self.setupUi(self)
         self.pushButton.clicked.connect(self.gen)
 
     def gen(self):
@@ -18,7 +18,10 @@ class MyWidget(QMainWindow):
         qp = QtGui.QPainter()
         qp.begin(self)
         for i in range(5):
-            qp.setBrush(QtGui.QColor(255, 255, 0))
+            r = random.randint(0, 255)
+            g = random.randint(0, 255)
+            b = random.randint(0, 255)
+            qp.setBrush(QtGui.QColor(r, g, b))
             d = random.randint(5, 200)
             x = random.randint(0, 400 - d)
             y = random.randint(0, 400 - d)
